@@ -132,3 +132,5 @@ const createPersonInfo = () => {
         const element =document.querySelector(id); 
         element.value = value;
     }
+
+    
