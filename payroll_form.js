@@ -45,6 +45,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 const seve = () => {
     try {
         let PersonInfo = createPersonInfo();
+        createAndUpdateStorage(PersonInfo);
     }
     catch (e) {
         return;
@@ -89,4 +90,16 @@ const createPersonInfo = () => {
     const getInputElementValue = (id) => {
         let value= document.getElementById(id).value;
         return value;
-    }    
+    }
+    
+    function createAndUpdateStorage (PersonInfo) {
+        let employeePayrollList =JSON.parse(localStorage.getItem("EmployeePayrollList"));
+        
+        if(employeePayrollList != undefined){
+                    employeePayrollList.push(PersonInfo);
+        } else{
+                employeePayrollList = [PersonInfo]
+        }
+        alert(employeePayrollList.toString());
+        localStorage.setItem ("EmployeePayrollList", JSON.stringify (employeePayrollList))
+    }
