@@ -1,5 +1,9 @@
+let empPayrollList;
 window.addEvenListener('DOMContentLoaded',(event) =>{
-        createInnerHtml();
+    empPayrollList = getEmployeePayrollDataFromStorage();
+    document.querySelector(".emp-count").textContent = empPayrollList.length;
+    createInnerHtml();
+    localStorage.removeItem('editEmp');
 });
 
 // //Templete features 
@@ -24,11 +28,17 @@ window.addEvenListener('DOMContentLoaded',(event) =>{
 //     document.querySelector('#table-display').innerHtml = innerHtml;
 // }
 
+const getEmployeePayrollDataFromStorage = () =>{
+    return localStorage.getItem('EmployeePayrollList')?
+        JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
+}
+
+
 const createInnerHtml = () =>{
 
     const headerHtml = "<th></th><th>Name</th><th>Gender</th><th>Department</th>"+
-    "<th>Salary</th><th>Start Date</th><th>Actions</th>";
-
+                        "<th>Salary</th><th>Start Date</th><th>Actions</th>";
+    if(employeePayrollList.length == 0) return;
     let innerHtml = `${headerHtml}`;
     let empPayrollList = createEmployeePayrollJSON();
     for (const empPayrollList of empPayrollList){
